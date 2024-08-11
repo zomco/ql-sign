@@ -1273,13 +1273,13 @@ function formatBodyFun(contentType, body) {
 }
 
 /**
- * sendNotify 推送通知功能
+ * dep_sendNotify 推送通知功能
  * @param text 通知头
  * @param desp 通知体
  * @param params 某些推送通知方式点击弹窗可跳转, 例：{ url: 'https://abc.com' }
  * @returns {Promise<unknown>}
  */
-async function sendNotify(text, desp, params = {}) {
+async function dep_sendNotify(text, desp, params = {}) {
   // 根据标题跳过一些消息推送，环境变量：SKIP_PUSH_TITLE 用回车分隔
   let skipTitle = process.env.SKIP_PUSH_TITLE;
   if (skipTitle) {
@@ -1318,5 +1318,5 @@ async function sendNotify(text, desp, params = {}) {
 }
 
 module.exports = {
-  sendNotify,
+  sendNotify: dep_sendNotify,
 };

@@ -1,9 +1,8 @@
-import json
 import sys
 
 import requests
 import os
-import py_tools.notify as notify
+import dep_notify as notify
 
 CHAGEE_TOKENS = os.getenv('CHAGEE_TOKENS')  # {token1,token2,...}
 CHAGEE_NAMES = os.getenv('CHAGEE_NAMES')    # {name1,name2,...}
