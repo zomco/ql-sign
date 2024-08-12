@@ -5,10 +5,10 @@ import requests
 
 from tools import notify as notify
 
-CHAGEE_TOKENS = os.getenv('CHAGEE_TOKENS')  # {token1,token2,...}
-CHAGEE_NAMES = os.getenv('CHAGEE_NAMES')  # {name1,name2,...}
-appid = 'wxafec6f8422cb357b'
-appname = '霸王茶姬'
+ZIYUELI_TOKENS = os.getenv('ZIYUELI_TOKENS')  # {token1,token2,...}
+ZIYUELI_NAMES = os.getenv('ZIYUELI_NAMES')  # {name1,name2,...}
+appid = 'wx0efa6f01d6869646'
+appname = '子曰礼'
 
 
 def get_headers(token_):
@@ -16,15 +16,15 @@ def get_headers(token_):
         "Qm-From": "wechat",
         "Qm-User-Token": token_,
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 MicroMessenger/7.0.20.1781(0x6700143B) NetType/WIFI MiniProgramEnv/Windows WindowsWechat/WMPF WindowsWechat(0x63090a13) XWEB/9129",
-        "Qm-From-Type": "catering",
-        "Referer": "https://servicewechat.com/wxafec6f8422cb357b/167/page-frame.html",
+        "Qm-From-Type": "mealmate",
+        "Referer": "https://servicewechat.com/wx0efa6f01d6869646/8/page-frame.html",
         "xweb_xhr": "1"
     }
     return headers_
 
 
 def check_score(headers_, name_):
-    url1 = 'https://webapi2.qmai.cn/web/catering2-apiserver/crm/points-info'
+    url1 = 'https://webapi.qmai.cn/web/mall-apiserver/integral/user/points-info'
     data = {"appid": appid}
     try:
         response = requests.post(url=url1, headers=headers_, data=data).json()
@@ -43,8 +43,8 @@ def check_score(headers_, name_):
 
 
 def daily_sign(headers_, name_):
-    activity_id = '947079313798000641'
-    url1 = 'https://webapi2.qmai.cn/web/cmk-center/sign/takePartInSign'
+    activity_id = '988140066214645761'
+    url1 = 'https://webapi.qmai.cn/web/cmk-center/sign/takePartInSign'
     data = {"activityId": activity_id, "appid": appid}
     try:
         response = requests.post(url=url1, headers=headers, data=data).json()
@@ -62,11 +62,11 @@ def daily_sign(headers_, name_):
 
 
 if __name__ == '__main__':
-    if not CHAGEE_TOKENS:
-        notify.print("请先配置环境变量 CHAGEE_TOKENS ")
+    if not ZIYUELI_TOKENS:
+        notify.print("请先配置环境变量 ZIYUELI_TOKENS ")
         sys.exit()
-    tokens = CHAGEE_TOKENS.split()
-    names = CHAGEE_NAMES.split()
+    tokens = ZIYUELI_TOKENS.split()
+    names = ZIYUELI_NAMES.split()
     for i, token in enumerate(tokens):
         headers = get_headers(token)
         name = names[i] if names[i] else "#{}用户".format(i + 1)
