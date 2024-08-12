@@ -49,6 +49,9 @@ def daily_sign(headers_, name_):
         notify.print(response)
         if not response['status']:
             print("{} daily sign failed: {}".format(name_, response['message']))
+            title = "{} 霸王茶姬签到".format(name_)
+            content = "错误信息: {}".format(response['message'])
+            notify.wecom_bot(title, content)
             return False
         return check_score(headers_, name_)
     except requests.exceptions.RequestException as e:
@@ -65,5 +68,5 @@ if __name__ == '__main__':
     names = CHAGEE_NAMES.split(',')
     for i, token in enumerate(tokens):
         headers = get_headers(token)
-        name = names[i] if not names[i] else "#{}用户".format(i + 1)
+        name = names[i] if names[i] else "#{}用户".format(i + 1)
         daily_sign(headers, name)
